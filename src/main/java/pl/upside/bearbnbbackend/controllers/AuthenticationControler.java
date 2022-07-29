@@ -9,6 +9,6 @@ public class AuthenticationControler {
 
     @PostMapping("/signup")
     public User signin(@RequestParam String email, @RequestParam String password){
-        return new User(-1, "not@implemented", "notimplemented", null);
+        return new User(-1L, "not@implemented", "notimplemented", null);
     }
 }
