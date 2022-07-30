@@ -6,16 +6,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.upside.bearbnbbackend.model.ERoles;
 import pl.upside.bearbnbbackend.model.Role;
+import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.repository.RoleRepository;
+import pl.upside.bearbnbbackend.repository.UserRepository;
 
 @Component
 public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedEvent> {
     boolean setupDone = false;
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
-    public SetupDevDataLoader(RoleRepository roleRepository) {
+    public SetupDevDataLoader(RoleRepository roleRepository, UserRepository userRepository) {
         this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -25,7 +29,16 @@ public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedE
         for (ERoles role : ERoles.values()) {
             createRole(role);
         }
+        Role adminRole = new Role(ERoles.ROLE_ADMIN.name());
+        User testUser = new User();
+        testUser.setEmail("test@test.com");
+        testUser.setPassword("test");
+        createUser(testUser);
+    }
 
+    @Transactional
+    public void createUser(User user){
+        if(userRepository.findByEmail(user.getEmail()).isEmpty()) { userRepository.save(user); }
     }
 
     @Transactional

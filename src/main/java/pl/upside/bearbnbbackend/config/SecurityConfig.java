@@ -3,15 +3,32 @@ package pl.upside.bearbnbbackend.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import pl.upside.bearbnbbackend.repository.UserRepository;
+import pl.upside.bearbnbbackend.services.DBUserDetailsService;
 
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+        httpSecurity.authorizeHttpRequests(auth -> auth
+                        .antMatchers(Routes.ROOT.getRoute()).permitAll()
+                        .anyRequest().authenticated())
                 .httpBasic();
         return httpSecurity.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return new DBUserDetailsService(userRepository);
     }
 }
