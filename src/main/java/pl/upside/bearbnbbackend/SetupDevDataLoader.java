@@ -1,7 +1,9 @@
 package pl.upside.bearbnbbackend;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.upside.bearbnbbackend.model.ERoles;
@@ -10,17 +12,16 @@ import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.repository.RoleRepository;
 import pl.upside.bearbnbbackend.repository.UserRepository;
 
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedEvent> {
     boolean setupDone = false;
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-
-    public SetupDevDataLoader(RoleRepository roleRepository, UserRepository userRepository) {
-        this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
-    }
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -29,10 +30,12 @@ public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedE
         for (ERoles role : ERoles.values()) {
             createRole(role);
         }
-        Role adminRole = new Role(ERoles.ROLE_ADMIN.name());
+        Role adminRole = roleRepository.findByName(ERoles.ROLE_ADMIN.name())
+                .orElse(new Role(ERoles.ROLE_ADMIN.name()));
         User testUser = new User();
-        testUser.setEmail("test@test.com");
-        testUser.setPassword("test");
+        testUser.setEmail("t1@t.com");
+        testUser.setPassword(passwordEncoder.encode("test"));
+        testUser.setRoles(List.of(adminRole));
         createUser(testUser);
     }
 

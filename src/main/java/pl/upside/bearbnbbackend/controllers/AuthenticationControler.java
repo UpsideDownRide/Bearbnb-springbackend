@@ -2,7 +2,10 @@ package pl.upside.bearbnbbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.upside.bearbnbbackend.model.ERoles;
 import pl.upside.bearbnbbackend.model.Role;
 import pl.upside.bearbnbbackend.model.User;
@@ -18,6 +21,7 @@ import java.util.List;
 public class AuthenticationControler {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/signin")
     public User signin(@RequestParam String email, @RequestParam String password){
@@ -27,8 +31,12 @@ public class AuthenticationControler {
     @CrossOrigin("*")
     @PostMapping("/signup")
     public User signup(@RequestParam String email, @RequestParam String password){
+        if (userRepository.existsByEmail(email)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
+        }
         Role userRole = roleRepository.findByName(ERoles.ROLE_USER.toString()).orElseThrow();
-        User user = userRepository.save(new User(email, password, List.of(userRole)));
+        User userToAdd = new User(email, passwordEncoder.encode(password), List.of(userRole));
+        User user = userRepository.save(userToAdd);
         log.info("Created user: " + email);
         return user;
     }
