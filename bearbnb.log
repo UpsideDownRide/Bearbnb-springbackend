@@ -1,0 +1,111 @@
+2022-07-30 10:45:18.411  INFO 33796 --- [restartedMain] p.u.b.BearbnbBackendApplication          : Starting BearbnbBackendApplication using Java 18.0.1.1 on UPSIDE-R-DESKTOP with PID 33796 (E:\devProject\springBackend\bearbnb-backend\target\classes started by Upside in E:\devProject\springBackend\bearbnb-backend)
+2022-07-30 10:45:18.412  INFO 33796 --- [restartedMain] p.u.b.BearbnbBackendApplication          : No active profile set, falling back to 1 default profile: "default"
+2022-07-30 10:45:18.439  INFO 33796 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-30 10:45:18.439  INFO 33796 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-30 10:45:18.753  INFO 33796 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-30 10:45:18.779  INFO 33796 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 2 JPA repository interfaces.
+2022-07-30 10:45:19.083  INFO 33796 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-30 10:45:19.087  INFO 33796 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-30 10:45:19.087  INFO 33796 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-30 10:45:19.124  INFO 33796 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-30 10:45:19.124  INFO 33796 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 684 ms
+2022-07-30 10:45:19.193  INFO 33796 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-30 10:45:19.211  INFO 33796 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-07-30 10:45:19.265  INFO 33796 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-30 10:45:19.305  INFO 33796 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-30 10:45:19.452  INFO 33796 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-30 10:45:19.459  INFO 33796 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-07-30 10:45:19.753  INFO 33796 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-30 10:45:19.757  INFO 33796 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-30 10:45:19.989  WARN 33796 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-30 10:45:20.066  INFO 33796 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2cc989df, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@43c82ed4, org.springframework.security.web.context.SecurityContextPersistenceFilter@310d4c2c, org.springframework.security.web.header.HeaderWriterFilter@1aebf978, org.springframework.web.filter.CorsFilter@51a09e8b, org.springframework.security.web.csrf.CsrfFilter@4f235b4a, org.springframework.security.web.authentication.logout.LogoutFilter@584dbae6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4e196d7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1e99ea1e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3d61f62f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f03c73b, org.springframework.security.web.session.SessionManagementFilter@2dff13cf, org.springframework.security.web.access.ExceptionTranslationFilter@1fffac36, org.springframework.security.web.access.intercept.AuthorizationFilter@29e9a022]
+2022-07-30 10:45:20.158  INFO 33796 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-30 10:45:20.180  INFO 33796 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-30 10:45:20.233 DEBUG 33796 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        role0_.id as id1_0_,
+        role0_.name as name2_0_ 
+    from
+        role role0_ 
+    where
+        role0_.name=?
+2022-07-30 10:45:20.234 TRACE 33796 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ROLE_ADMIN]
+2022-07-30 10:45:20.249 DEBUG 33796 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        role0_.id as id1_0_,
+        role0_.name as name2_0_ 
+    from
+        role role0_ 
+    where
+        role0_.name=?
+2022-07-30 10:45:20.249 TRACE 33796 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ROLE_USER]
+2022-07-30 10:45:20.250 DEBUG 33796 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        user0_.id as id1_1_,
+        user0_.email as email2_1_,
+        user0_.password as password3_1_ 
+    from
+        user user0_ 
+    where
+        user0_.email=?
+2022-07-30 10:45:20.251 TRACE 33796 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test@test.com]
+2022-07-30 10:45:20.256  INFO 33796 --- [restartedMain] p.u.b.BearbnbBackendApplication          : Started BearbnbBackendApplication in 2.035 seconds (JVM running for 2.387)
+2022-07-30 10:49:45.877  INFO 33796 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-07-30 10:49:45.879  INFO 33796 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-07-30 10:49:45.883  INFO 33796 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-07-30 10:49:49.572  INFO 22308 --- [restartedMain] p.u.b.BearbnbBackendApplication          : Starting BearbnbBackendApplication using Java 18.0.1.1 on UPSIDE-R-DESKTOP with PID 22308 (E:\devProject\springBackend\bearbnb-backend\target\classes started by Upside in E:\devProject\springBackend\bearbnb-backend)
+2022-07-30 10:49:49.572  INFO 22308 --- [restartedMain] p.u.b.BearbnbBackendApplication          : No active profile set, falling back to 1 default profile: "default"
+2022-07-30 10:49:49.597  INFO 22308 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-30 10:49:49.598  INFO 22308 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-30 10:49:49.923  INFO 22308 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-30 10:49:49.946  INFO 22308 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 2 JPA repository interfaces.
+2022-07-30 10:49:50.240  INFO 22308 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-30 10:49:50.244  INFO 22308 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-30 10:49:50.245  INFO 22308 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-30 10:49:50.282  INFO 22308 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-30 10:49:50.282  INFO 22308 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 684 ms
+2022-07-30 10:49:50.353  INFO 22308 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-30 10:49:50.370  INFO 22308 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-07-30 10:49:50.424  INFO 22308 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-30 10:49:50.464  INFO 22308 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-30 10:49:50.608  INFO 22308 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-30 10:49:50.614  INFO 22308 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-07-30 10:49:50.905  INFO 22308 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-30 10:49:50.909  INFO 22308 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-30 10:49:51.131  WARN 22308 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-30 10:49:51.207  INFO 22308 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7e28e22f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79f9d9a8, org.springframework.security.web.context.SecurityContextPersistenceFilter@39254f6, org.springframework.security.web.header.HeaderWriterFilter@1394a0e2, org.springframework.web.filter.CorsFilter@798ba0f1, org.springframework.security.web.csrf.CsrfFilter@32f9db03, org.springframework.security.web.authentication.logout.LogoutFilter@25aa0d10, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4f7983db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ba46b88, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3b0752c8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@ddbd13, org.springframework.security.web.session.SessionManagementFilter@696bf334, org.springframework.security.web.access.ExceptionTranslationFilter@6efef659, org.springframework.security.web.access.intercept.AuthorizationFilter@123e9aa6]
+2022-07-30 10:49:51.301  INFO 22308 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-30 10:49:51.319  INFO 22308 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-30 10:49:51.371 DEBUG 22308 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        role0_.id as id1_0_,
+        role0_.name as name2_0_ 
+    from
+        role role0_ 
+    where
+        role0_.name=?
+2022-07-30 10:49:51.372 TRACE 22308 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ROLE_ADMIN]
+2022-07-30 10:49:51.386 DEBUG 22308 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        role0_.id as id1_0_,
+        role0_.name as name2_0_ 
+    from
+        role role0_ 
+    where
+        role0_.name=?
+2022-07-30 10:49:51.387 TRACE 22308 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ROLE_USER]
+2022-07-30 10:49:51.389 DEBUG 22308 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        user0_.id as id1_1_,
+        user0_.email as email2_1_,
+        user0_.password as password3_1_ 
+    from
+        user user0_ 
+    where
+        user0_.email=?
+2022-07-30 10:49:51.389 TRACE 22308 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test@test.com]
+2022-07-30 10:49:51.393  INFO 22308 --- [restartedMain] p.u.b.BearbnbBackendApplication          : Started BearbnbBackendApplication in 2.016 seconds (JVM running for 2.385)
+2022-07-30 10:49:54.993  INFO 22308 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-30 10:49:54.993  INFO 22308 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-30 10:49:54.994  INFO 22308 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-07-30 10:49:55.023  INFO 22308 --- [http-nio-8080-exec-2] p.u.b.c.AuthenticationControler          : Created user: test
