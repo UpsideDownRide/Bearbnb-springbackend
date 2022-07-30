@@ -15,8 +15,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(auth -> auth
-                        .antMatchers(Routes.ROOT.getRoute()).permitAll()
+        httpSecurity
+                .cors().and()
+                .csrf().ignoringAntMatchers(PublicRoutes.getAll()).and()
+                .authorizeHttpRequests(auth -> auth
+                        .antMatchers(Routes.SIGNUP.getRoute()).permitAll()
+                        .antMatchers(Routes.LOGIN.getRoute()).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic();
         return httpSecurity.build();
@@ -31,4 +35,5 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new DBUserDetailsService(userRepository);
     }
+
 }

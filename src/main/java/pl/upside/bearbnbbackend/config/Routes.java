@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum Routes {
-    ROOT("/"),
-    SIGNUP("/signup"),
-    LOGIN("/login"),
-    LOGOUT("/logout");
+    ROOT("/api/auth"),
+    SIGNUP(ROOT.getRoute() + "/signup"),
+    LOGIN(ROOT.getRoute() + "/login"),
+    LOGOUT(ROOT.getRoute() + "/logout");
 
     final String route;
 
