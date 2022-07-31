@@ -2,15 +2,17 @@ package pl.upside.bearbnbbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import pl.upside.bearbnbbackend.exceptions.UserAlreadyExistsAuthException;
 import pl.upside.bearbnbbackend.model.ERoles;
 import pl.upside.bearbnbbackend.model.Role;
 import pl.upside.bearbnbbackend.model.User;
-import pl.upside.bearbnbbackend.repository.RoleRepository;
-import pl.upside.bearbnbbackend.repository.UserRepository;
+import pl.upside.bearbnbbackend.repositories.RoleRepository;
+import pl.upside.bearbnbbackend.repositories.UserRepository;
 
 import java.util.List;
 
@@ -28,21 +30,12 @@ public class AuthenticationControler {
         return new User(-1L, "not@implemented", "notimplemented", null);
     }
 
-    @CrossOrigin("*")
     @PostMapping("/signup")
     public User signup(@RequestParam String email, @RequestParam String password){
-        if (userRepository.existsByEmail(email)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
-        }
         Role userRole = roleRepository.findByName(ERoles.ROLE_USER.toString()).orElseThrow();
         User userToAdd = new User(email, passwordEncoder.encode(password), List.of(userRole));
-        User user = userRepository.save(userToAdd);
+        User user = userRepository.saveIfNotExists(userToAdd).orElseThrow(UserAlreadyExistsAuthException::new);
         log.info("Created user: " + email);
         return user;
-    }
-
-    @GetMapping("/signup")
-    public User signupTest(){
-        return new User(-1L, "not@implemented", "notimplemented", null);
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import pl.upside.bearbnbbackend.repository.UserRepository;
+import pl.upside.bearbnbbackend.repositories.UserRepository;
 import pl.upside.bearbnbbackend.services.DBUserDetailsService;
 
 @Configuration

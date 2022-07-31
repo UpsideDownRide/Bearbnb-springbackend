@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.upside.bearbnbbackend.model.ERoles;
 import pl.upside.bearbnbbackend.model.Role;
 import pl.upside.bearbnbbackend.model.User;
-import pl.upside.bearbnbbackend.repository.RoleRepository;
-import pl.upside.bearbnbbackend.repository.UserRepository;
+import pl.upside.bearbnbbackend.repositories.RoleRepository;
+import pl.upside.bearbnbbackend.repositories.UserRepository;
 
 import java.util.List;
 

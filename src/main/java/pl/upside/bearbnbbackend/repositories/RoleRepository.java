@@ -1,4 +1,4 @@
-package pl.upside.bearbnbbackend.repository;
+package pl.upside.bearbnbbackend.repositories;
 import org.springframework.data.repository.CrudRepository;
 import pl.upside.bearbnbbackend.model.Role;
 
