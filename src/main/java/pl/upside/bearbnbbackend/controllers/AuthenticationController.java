@@ -14,13 +14,13 @@ import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.repositories.RoleRepository;
 import pl.upside.bearbnbbackend.repositories.UserRepository;
 
-import java.util.List;
+import java.util.Set;
 
 @RequestMapping("/api/auth")
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class AuthenticationControler {
+public class AuthenticationController {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -33,7 +33,7 @@ public class AuthenticationControler {
     @PostMapping("/signup")
     public User signup(@RequestParam String email, @RequestParam String password){
         Role userRole = roleRepository.findByName(ERoles.ROLE_USER.toString()).orElseThrow();
-        User userToAdd = new User(email, passwordEncoder.encode(password), List.of(userRole));
+        User userToAdd = new User(email, passwordEncoder.encode(password), Set.of(userRole));
         User user = userRepository.saveIfNotExists(userToAdd).orElseThrow(UserAlreadyExistsAuthException::new);
         log.info("Created user: " + email);
         return user;

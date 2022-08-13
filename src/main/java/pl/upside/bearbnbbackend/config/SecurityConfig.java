@@ -21,6 +21,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers(Routes.SIGNUP.getRoute()).permitAll()
                         .antMatchers(Routes.LOGIN.getRoute()).permitAll()
+                        .antMatchers(Routes.LOGOUT.getRoute()).permitAll()
+                        .antMatchers("/api/listings/add").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic();
         return httpSecurity.build();

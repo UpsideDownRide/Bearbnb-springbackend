@@ -12,7 +12,7 @@ import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.repositories.RoleRepository;
 import pl.upside.bearbnbbackend.repositories.UserRepository;
 
-import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +35,7 @@ public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedE
         User testUser = new User();
         testUser.setEmail("t1@t.com");
         testUser.setPassword(passwordEncoder.encode("test"));
-        testUser.setRoles(List.of(adminRole));
+        testUser.setRoles(Set.of(adminRole));
         createUser(testUser);
     }
 
