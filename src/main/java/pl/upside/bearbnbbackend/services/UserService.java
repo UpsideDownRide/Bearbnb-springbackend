@@ -26,6 +26,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+
     public User save(User user) {
         Set<Role> userRoles = user.getRoles() == null ? Set.of(roleRepository.findByName(ERoles.ROLE_USER.toString()).orElseThrow()) : user.getRoles();
         User userToAdd = new User(user.getEmail(),

@@ -3,27 +3,23 @@ package pl.upside.bearbnbbackend.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import pl.upside.bearbnbbackend.filters.TokenAuthenticationFilter;
-import pl.upside.bearbnbbackend.repositories.UserRepository;
-import pl.upside.bearbnbbackend.services.DBUserDetailsService;
+import pl.upside.bearbnbbackend.filters.JwtRequestFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final TokenAuthenticationFilter tokenFilter;
+    private final JwtRequestFilter tokenFilter;
 
     @Bean
     public SecurityFilterChain basicConfig(HttpSecurity http) throws Exception {
@@ -51,10 +47,9 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new DBUserDetailsService(userRepository);
+    public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
 }

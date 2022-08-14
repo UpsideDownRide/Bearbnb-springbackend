@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.model.UserDetailsImpl;
 import pl.upside.bearbnbbackend.repositories.UserRepository;
@@ -11,6 +12,7 @@ import pl.upside.bearbnbbackend.repositories.UserRepository;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class DBUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
