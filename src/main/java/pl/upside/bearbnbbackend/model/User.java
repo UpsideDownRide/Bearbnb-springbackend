@@ -1,11 +1,11 @@
 package pl.upside.bearbnbbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
 import java.util.Set;
 
 @Getter
@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "users")
 public class User {
     @Id
@@ -25,6 +26,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -37,5 +39,10 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 }

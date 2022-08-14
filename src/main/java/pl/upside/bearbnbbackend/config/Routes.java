@@ -1,17 +1,8 @@
 package pl.upside.bearbnbbackend.config;
 
-import lombok.Getter;
-
-@Getter
-public enum Routes {
-    ROOT("/api/auth"),
-    SIGNUP(ROOT.getRoute() + "/signup"),
-    LOGIN(ROOT.getRoute() + "/login"),
-    LOGOUT(ROOT.getRoute() + "/logout");
-
-    final String route;
-
-    Routes(String route) {
-        this.route = route;
-    }
+public class Routes {
+    public final static String API_AUTH = "/api/auth";
+    public final static String SIGNUP = API_AUTH + "/signup";
+    public final static String LOGIN = API_AUTH + "/login";
+    public final static String LOGOUT = API_AUTH + "/logout";
 }

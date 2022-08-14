@@ -10,7 +10,7 @@ import pl.upside.bearbnbbackend.model.ERoles;
 import pl.upside.bearbnbbackend.model.Role;
 import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.repositories.RoleRepository;
-import pl.upside.bearbnbbackend.repositories.UserRepository;
+import pl.upside.bearbnbbackend.services.UserService;
 
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedE
     boolean setupDone = false;
 
     private final RoleRepository roleRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -41,7 +41,7 @@ public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedE
 
     @Transactional
     public void createUser(User user){
-        if(userRepository.findByEmail(user.getEmail()).isEmpty()) { userRepository.save(user); }
+        if(userService.findByEmail(user.getEmail()).isEmpty()) { userService.save(user); }
     }
 
     @Transactional

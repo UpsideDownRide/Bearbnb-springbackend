@@ -1,5 +1,6 @@
 package pl.upside.bearbnbbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,10 +9,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.data.geo.Point;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,9 +27,13 @@ public class Listing {
     private String country;
     private String city;
     private String address;
-
     private String title;
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "users_id")
+    @JsonIgnore
+    private User user;
 
     @OneToMany(mappedBy = "listing")
     @Cascade(CascadeType.PERSIST)
