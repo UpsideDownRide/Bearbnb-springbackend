@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.upside.bearbnbbackend.model.Listing;
 import pl.upside.bearbnbbackend.model.ListingImage;
 import pl.upside.bearbnbbackend.model.User;
+import pl.upside.bearbnbbackend.model.requests.AddListingRequest;
 import pl.upside.bearbnbbackend.repositories.ListingRepository;
 import pl.upside.bearbnbbackend.repositories.UserRepository;
 
@@ -22,9 +23,9 @@ public class ListingsController {
     private final UserRepository userRepository;
 
     @PostMapping("/add")
-    public Listing addListing(@RequestParam String title) {
+    public Listing addListing(@RequestBody AddListingRequest addListingRequest) {
         Listing toAdd = new Listing();
-        toAdd.setTitle(title);
+        toAdd.setTitle(addListingRequest.title());
         toAdd.setUser(userRepository.findById(13L).orElseThrow());
         return listingRepository.save(toAdd);
     }

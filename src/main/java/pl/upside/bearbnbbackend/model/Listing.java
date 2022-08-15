@@ -23,12 +23,18 @@ public class Listing {
     @GeneratedValue
     private UUID id;
 
-    private Point geolocation;
-    private String country;
-    private String city;
-    private String address;
-    private String title;
-    private String description;
+    private Point   geolocation;
+    private String  country;
+    private String  city;
+    private String  address;
+    private String  title;
+    private String  description;
+    private String  type;
+    private int     bedrooms;
+    private int     bathrooms;
+    private int     beds;
+    private boolean petFriendly;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "users_id")
