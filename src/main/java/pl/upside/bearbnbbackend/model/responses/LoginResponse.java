@@ -1,4 +1,6 @@
 package pl.upside.bearbnbbackend.model.responses;
 
-public record LoginResponse(String email, String token) {
+import pl.upside.bearbnbbackend.model.User;
+
+public record LoginResponse(User user, String token) {
 }

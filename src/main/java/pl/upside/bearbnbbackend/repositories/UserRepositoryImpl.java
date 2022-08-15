@@ -26,7 +26,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     @Transactional
     public Optional<User> saveIfNotExists(User user) {
         if (!existsByEmail(user.getEmail())) {
-            this.entityManager.persist(user);
+            entityManager.persist(user.getUserPersonal());
+            entityManager.persist(user);
+
             return Optional.of(user);
         } else {
             return Optional.empty();

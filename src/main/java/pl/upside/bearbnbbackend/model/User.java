@@ -35,14 +35,21 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
-    public User(String email, String password, Set<Role> roles) {
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @JsonIgnore
+    private UserPersonal userPersonal;
+
+    public User(String email, String password, UserPersonal personalData, Set<Role> roles) {
         this.email = email;
         this.password = password;
+        this.userPersonal = personalData;
         this.roles = roles;
     }
 
-    public User(String email, String password) {
+    public User(String email, String password, UserPersonal personalData) {
         this.email = email;
         this.password = password;
+        this.userPersonal = personalData;
     }
 }

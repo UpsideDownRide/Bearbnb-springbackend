@@ -19,7 +19,7 @@ public class JwtTokenService {
 
     private final Algorithm hmac512;
     private final JWTVerifier verifier;
-    private static final long JWT_TOKEN_VALIDITY = 1 * 60 * 60 * 1000;
+    private static final long JWT_TOKEN_VALIDITY = 1 * 60 * 60 * 1000; // 1 hour
 
     public JwtTokenService(@Value("${jwt.secret}") final String secret) {
         this.hmac512 = Algorithm.HMAC512(secret);

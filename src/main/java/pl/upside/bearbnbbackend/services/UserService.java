@@ -2,6 +2,10 @@ package pl.upside.bearbnbbackend.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.upside.bearbnbbackend.exceptions.UserAlreadyExistsAuthException;
@@ -21,18 +25,24 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenService tokenService;
 
     public Optional<User> findByEmail(String email){
         return userRepository.findByEmail(email);
     }
 
-
     public User save(User user) {
         Set<Role> userRoles = user.getRoles() == null ? Set.of(roleRepository.findByName(ERoles.ROLE_USER.toString()).orElseThrow()) : user.getRoles();
-        User userToAdd = new User(user.getEmail(),
-                passwordEncoder.encode(user.getPassword()),
-                userRoles);
-        log.info("Created user: " + user.getEmail());
-        return userRepository.saveIfNotExists(userToAdd).orElseThrow(UserAlreadyExistsAuthException::new);
+        user.setRoles(userRoles);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info("Creating user: " + user.getEmail());
+        return userRepository.saveIfNotExists(user).orElseThrow(UserAlreadyExistsAuthException::new);
+    }
+
+    public String login(String email, String password) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+        UserDetails user = (UserDetails) authentication.getPrincipal();
+        return tokenService.generateToken(user);
     }
 }
