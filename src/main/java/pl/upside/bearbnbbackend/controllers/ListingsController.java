@@ -52,15 +52,20 @@ public class ListingsController {
         return listingRepository.save(toAdd);
     }
 
+    @PostMapping("/api/listings/getAll")
+    public List<Listing> getAllListings() {
+        List<Listing> listings = new ArrayList<>();
+        listingRepository.findAll().forEach(listings::add);
+        return listings;
+    }
+
     @PostMapping("/api/images/add")
     public Listing addImages(@RequestParam List<MultipartFile> images, @RequestParam Long listingId) {
         try {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println(listingId);
             var listing = listingRepository.findById(listingId).orElseThrow();
             var listingImages = new ArrayList<ListingImage>();
             images.forEach(file -> {
-                var localFileName = UUID.randomUUID() + ".jpg"; //ugly hack
+                var localFileName = UUID.randomUUID(); //ugly hack
                 storageService.saveImageForListing(file, String.valueOf(listingId), localFileName);
                 var listingImage = new ListingImage();
                 listingImage.setListing(listing);
