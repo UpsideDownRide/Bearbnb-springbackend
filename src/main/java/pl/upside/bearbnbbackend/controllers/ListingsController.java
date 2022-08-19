@@ -3,26 +3,27 @@ package pl.upside.bearbnbbackend.controllers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.upside.bearbnbbackend.model.Listing;
 import pl.upside.bearbnbbackend.model.UserDetailsImpl;
 import pl.upside.bearbnbbackend.model.requests.AddImagesToListing;
 import pl.upside.bearbnbbackend.model.requests.AddListingRequest;
 import pl.upside.bearbnbbackend.repositories.ListingRepository;
+import pl.upside.bearbnbbackend.services.FileStorageService;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Slf4j
-@RequestMapping("/api/listings")
 @RequiredArgsConstructor
 public class ListingsController {
     private final ListingRepository listingRepository;
+    private final FileStorageService storageService;
 
-    @PostMapping("/add")
+    @PostMapping("/api/listings/add")
     public Listing addListing(@RequestBody AddListingRequest addListingRequest, Authentication auth) {
         Listing toAdd = new Listing();
 
@@ -47,8 +48,16 @@ public class ListingsController {
         return listingRepository.save(toAdd);
     }
 
-    @PostMapping("/add/images/{id}")
-    public Listing addImages(@RequestBody AddImagesToListing addImageToListingRequest, Authentication auth) {
-        return null;
+    @PostMapping("/api/images/add")
+    public Listing addImages(@RequestParam List<MultipartFile> files, Authentication auth) {
+        List<MultipartFile> f = files;
+        try {
+            var userDetails = (UserDetailsImpl) auth.getPrincipal();
+            var userId = userDetails.getUser().getId();
+            storageService.save(files.get(0), "test");
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

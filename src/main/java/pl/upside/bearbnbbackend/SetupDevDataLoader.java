@@ -11,6 +11,7 @@ import pl.upside.bearbnbbackend.model.Role;
 import pl.upside.bearbnbbackend.model.User;
 import pl.upside.bearbnbbackend.model.UserPersonal;
 import pl.upside.bearbnbbackend.repositories.RoleRepository;
+import pl.upside.bearbnbbackend.services.FileStorageService;
 import pl.upside.bearbnbbackend.services.UserService;
 
 import java.time.LocalDate;
