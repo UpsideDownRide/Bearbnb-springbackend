@@ -16,6 +16,7 @@ import pl.upside.bearbnbbackend.repositories.ListingRepository;
 import pl.upside.bearbnbbackend.services.FileStorageService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,17 +53,22 @@ public class ListingsController {
     }
 
     @PostMapping("/api/images/add")
-    public Listing addImages(@RequestParam List<MultipartFile> files, @RequestParam String listingId) {
+    public Listing addImages(@RequestParam List<MultipartFile> images, @RequestParam Long listingId) {
         try {
-            var listing = listingRepository.findById(UUID.fromString(listingId)).orElseThrow();
-            files.forEach(file -> {
-                var localFileName = UUID.randomUUID().toString() + ".jpg"; //ugly hack
-                storageService.saveImageForListing(file, listingId, localFileName);
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(listingId);
+            var listing = listingRepository.findById(listingId).orElseThrow();
+            var listingImages = new ArrayList<ListingImage>();
+            images.forEach(file -> {
+                var localFileName = UUID.randomUUID() + ".jpg"; //ugly hack
+                storageService.saveImageForListing(file, String.valueOf(listingId), localFileName);
                 var listingImage = new ListingImage();
                 listingImage.setListing(listing);
-                listingImage.setUrl("uploads/" + localFileName);
-                listingRepository.save(listing);
+                listingImage.setUrl("uploads/" + String.valueOf(listingId) + "/" + localFileName);
+                listingImages.add(listingImage);
             });
+            listing.setImages(listingImages);
+            listingRepository.save(listing);
             return listing;
         } catch (Exception e) {
             return null;

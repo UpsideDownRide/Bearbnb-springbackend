@@ -5,6 +5,5 @@ import pl.upside.bearbnbbackend.model.Listing;
 
 import java.util.UUID;
 
-public interface ListingRepository extends CrudRepository<Listing, UUID> {
-
+public interface ListingRepository extends CrudRepository<Listing, Long> {
 }

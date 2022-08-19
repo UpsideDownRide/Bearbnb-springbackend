@@ -21,8 +21,8 @@ import java.util.UUID;
 @Setter
 public class Listing {
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private Point   geolocation;
     private String  country;
@@ -62,13 +62,17 @@ public class Listing {
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private List<Price> prices;
 
+    public void setImages(List<ListingImage> images) {
+        images.forEach(price -> price.setListing(this));
+        this.images = images;
+    }
     public void setPrices(List<Price> prices) {
         prices.forEach(price -> price.setListing(this));
         this.prices = prices;
     }
 
     public void setAvailability(List<Availability> availability) {
-        prices.forEach(avail -> avail.setListing(this));
+        availability.forEach(avail -> avail.setListing(this));
         this.availability = availability;
     }
 }
