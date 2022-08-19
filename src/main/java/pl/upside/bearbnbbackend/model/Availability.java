@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Reservation {
+public class Availability {
     @Id
     @GeneratedValue
     private UUID id;
@@ -22,6 +23,6 @@ public class Reservation {
     @JsonIgnore
     private Listing listing;
 
-    private LocalDateTime startDateTime;
-    private LocalDateTime endingDateTime;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }

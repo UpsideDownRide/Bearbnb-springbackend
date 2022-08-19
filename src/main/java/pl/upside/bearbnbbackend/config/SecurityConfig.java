@@ -31,11 +31,12 @@ public class SecurityConfig {
         http.csrf().disable().cors();
         http.anonymous().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeHttpRequests(auth -> auth
+        http.authorizeHttpRequests(config -> config
                 .antMatchers(PublicRoutes.ALL).permitAll()
                 .anyRequest().authenticated());
         http.addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
         http.exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint());
+        //http.oauth2ResourceServer(oauth2 -> oauth2.authenticationManagerResolver(authenticationManagerResolver));
         http.httpBasic().disable();
         http.formLogin().disable();
         http.saml2Login().disable();
@@ -43,10 +44,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-        configuration.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("Content-Type", "accept", "Origin", "Access-Control-Request-Method",
                 "Access-Control-Request-Headers", "Authorization"));
         configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
@@ -56,18 +57,19 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
     @Bean
     public AuthenticationEntryPoint unauthorizedEntryPoint() {
         return (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
 }

@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.upside.bearbnbbackend.model.ERoles;
 import pl.upside.bearbnbbackend.model.Role;
 import pl.upside.bearbnbbackend.model.User;
+import pl.upside.bearbnbbackend.model.UserPersonal;
 import pl.upside.bearbnbbackend.repositories.RoleRepository;
 import pl.upside.bearbnbbackend.services.UserService;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Component
@@ -34,8 +36,14 @@ public class SetupDevDataLoader implements ApplicationListener<ContextRefreshedE
                 .orElse(new Role(ERoles.ROLE_ADMIN.name()));
         User testUser = new User();
         testUser.setEmail("t1@t.com");
-        testUser.setPassword(passwordEncoder.encode("test"));
         testUser.setRoles(Set.of(adminRole));
+        UserPersonal personalData = new UserPersonal();
+        personalData.setUser(testUser);
+        personalData.setFirstName("Tester");
+        personalData.setLastName("Testerowski");
+        personalData.setDateOfBirth(LocalDate.of(1992, 2, 2));
+        testUser.setUserPersonal(personalData);
+        testUser.setPassword(passwordEncoder.encode("test"));
         createUser(testUser);
     }
 
