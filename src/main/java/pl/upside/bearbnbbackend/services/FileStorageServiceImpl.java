@@ -11,7 +11,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
@@ -27,11 +26,12 @@ public class FileStorageServiceImpl implements FileStorageService {
         }
     }
     @Override
-    public void save(MultipartFile file, String listingId) {
+    public void saveImageForListing(MultipartFile file, String listingId, String localName) {
         try {
-            Path uploadDir = Path.of("uploads", listingId.toString());
+            Path uploadDir = Path.of(this.root.toString(), listingId.toString());
             if (Files.notExists(uploadDir)) { Files.createDirectory(uploadDir); }
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+            Path destination = uploadDir.resolve(String.join("", localName,".jpg"));
+            Files.copy(file.getInputStream(), destination);
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }

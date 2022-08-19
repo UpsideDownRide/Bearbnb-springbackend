@@ -20,13 +20,13 @@ public class ListingImage {
     @JsonIgnore
     private Listing listing;
     private String url;
-    private int width;
-    private int height;
+//    private int width;
+//    private int height;
 
-    public ListingImage(Listing listing, String url, int width, int height) {
+    public ListingImage(Listing listing, String url) {
         this.listing = listing;
         this.url = url;
-        this.width = width;
-        this.height = height;
+//        this.width = width;
+//        this.height = height;
     }
 }
