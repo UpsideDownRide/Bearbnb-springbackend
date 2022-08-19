@@ -65,11 +65,11 @@ public class ListingsController {
             var listing = listingRepository.findById(listingId).orElseThrow();
             var listingImages = new ArrayList<ListingImage>();
             images.forEach(file -> {
-                var localFileName = UUID.randomUUID(); //ugly hack
+                var localFileName = UUID.randomUUID().toString(); //ugly hack
                 storageService.saveImageForListing(file, String.valueOf(listingId), localFileName);
                 var listingImage = new ListingImage();
                 listingImage.setListing(listing);
-                listingImage.setUrl("uploads/" + String.valueOf(listingId) + "/" + localFileName);
+                listingImage.setUrl("uploads/" + String.valueOf(listingId) + "/" + localFileName + ".jpg");
                 listingImages.add(listingImage);
             });
             listing.setImages(listingImages);
