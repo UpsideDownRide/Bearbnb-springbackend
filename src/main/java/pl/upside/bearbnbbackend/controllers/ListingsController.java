@@ -3,6 +3,7 @@ package pl.upside.bearbnbbackend.controllers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,6 +58,11 @@ public class ListingsController {
         List<Listing> listings = new ArrayList<>();
         listingRepository.findAll().forEach(listings::add);
         return listings;
+    }
+
+    @PostMapping("/api/listings/getUserListings")
+    public List<Listing> getUserListings(@RequestParam Long userId) {
+        return new ArrayList<>(listingRepository.findAllByUserId(userId).orElseThrow());
     }
 
     @PostMapping("/api/images/add")
